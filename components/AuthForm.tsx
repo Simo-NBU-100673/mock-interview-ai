@@ -9,7 +9,6 @@ import {
     Form,
     FormControl,
     FormDescription,
-    FormField,
     FormItem,
     FormLabel,
     FormMessage,
@@ -18,6 +17,7 @@ import {Input} from "@/components/ui/input"
 import Image from "next/image";
 import Link from "next/link";
 import {toast} from "sonner";
+import FormField from "@/components/FormField";
 
 const authFormSchema = (type: FormType) => {
     return z.object({
@@ -67,9 +67,25 @@ const AuthForm = ({type}: {type: FormType}) => {
                 <h3>Practice job interview with AI</h3>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full mt-4 form">
-                        {!isSignInPage && <p>Name</p>}
-                        <p>Email</p>
-                        <p>Password</p>
+                        {!isSignInPage && (
+                            <FormField
+                            control={form.control}
+                            name="name"
+                            label="Name"
+                            placeholder="Your Name"/>
+                        )}
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            label="Email"
+                            placeholder="Your Email Adress"
+                            type="email"/>
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            label="Password"
+                            placeholder="Enter your password"
+                            type="password"/>
                         <Button className={"btn"} type="submit">
                             {isSignInPage ? 'Sign in' : "Create an Account"}
                         </Button>
